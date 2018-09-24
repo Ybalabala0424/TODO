@@ -1,7 +1,8 @@
+<!--pages/add/add.wxml-->
 <view class='now-task'>新建任务</view>
 <van-cell-group>
   <van-field
-    value="{{ name }}"
+    value="{{ name}}"
     label="任务名称"
     placeholder=""
     bind:input="getName"
@@ -9,7 +10,7 @@
     error
   />
   <van-field
-    value="{{ infor }}"
+    value="{{infor }}"
     label="任务内容"
     type="textarea"
     placeholder=""
