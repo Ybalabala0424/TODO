@@ -1,66 +1,61 @@
 // pages/infor/infor.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    options:'',
+    datalist:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    var that = this;
+    let datalist = getApp().globalData.datalist;
+    that.setData({
+      datalist: datalist,
+      options: options.data.Name
+    });
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
   
+  finish: function (e) {
+    var that = this;
+    getApp().globalData.datalist[that.data.options].situation = 2;
+    wx.navigateTo({
+      url: '../index/index',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  delete: function () {
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确认删除？',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          delete getApp().globalData.datalist[that.data.options];
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          });
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            });
+          }, 1000)
+          console.log(getApp().globalData.datalist)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    });
+    
   }
 })
