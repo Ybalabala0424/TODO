@@ -41,9 +41,9 @@ Page({
   finish: function (e) {
     var that = this;
     getApp().globalData.dataList[that.data.options].situation = 0;
-    wx.navigateTo({
-      url: '../index/index',
-    })
+    wx.navigateBack({
+      delta: 1
+    });
   },
   delete: function () {
     var that = this;

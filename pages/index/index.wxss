@@ -61,3 +61,12 @@
   right: 60rpx;
   bottom: 80rpx;
 }
+
+.aaa{
+  padding-left:20px;
+}
+
+.bbb{
+  margin-left: 16px;
+  margin-right: 10px;
+}

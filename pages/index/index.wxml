@@ -3,24 +3,32 @@
 <van-notify id="custom-selector" />
 <view class='today'>{{time}}</view>
 <view class='now-task'>当前任务({{unNum}})</view>
+
 <view wx:if='{{unNum}}'>
-<view class="weui-cells weui-cells_after-title">
- <view class="weui-cell__bd" wx:for="{{unDo}}" wx:for-item="data" >
+<view  wx:for="{{unDo}}" wx:for-item="data" >
  <navigator url='../infor/infor?key={{data.key}}'>
-  <view class="weui-cell">
+  <view class="weui-cell" class="weui-cell weui-cell_access aaa" hover-class="weui-cell_active">
     <view class="weui-cell__bd">{{data.name}}</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </view>
+   <view class="weui-cells weui-cells_after-title bbb"/>
 </navigator>
 </view>
 </view>
-</view>
+
 <view class='no-task' wx:else>空空如也</view>
 <view class='show-btn' hover-class='show-btn-hover' bindtap='btn'>{{isShowHistory ? "隐藏历史任务" : "显示历史任务"}}</view>
 <view wx:if="{{isShowHistory}}">
+
   <van-cell-group>
     <view class="weui-cell__bd" wx:for="{{isDo}}" wx:for-item="data" >
-  <navigator url='../infor/infor?key={{data.key}}'>{{data.name}}</navigator>
+  <navigator url='../infor/infor?key={{data.key}}' >
+    <view class="weui-cell" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">{{data.name}}</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+     <view class="weui-cells weui-cells_after-title bbb"/>
+  </navigator>
  </view>
   </van-cell-group>
 </view>
