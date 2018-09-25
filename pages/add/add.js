@@ -62,18 +62,14 @@ Page({
       }
       //记录下标
       var index="task"+this.data.num;
-      console.log(temp);
       // console.log(temp.keyname);
       // this.dataList=app.globalData.dataList;
       // console.log(this.dataList);
       //增加任务
-      this.data.dataList[index] = temp;
+      app.globalData.dataList[index] = temp;
       // console.log(app.globalData.dataList[index]);
-      //num自增
-      this.data.num++;
       //全局的datalist同步局部的dataList
-      app.globalData.dataList = this.data.dataList;
-      app.globalData.num = this.data.num;
+      app.globalData.num++
       // console.log(app.globalData.dataList);
       /* this.setData({
          taskname:null,

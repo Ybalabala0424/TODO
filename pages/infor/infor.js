@@ -1,8 +1,13 @@
 // pages/infor/infor.js
+const app = getApp()
 Page({
   data: {
     options:'',
-    datalist:{}
+    dataList:{},
+   name:'',
+    infor:'',
+    situ:'',
+    Label:''
   },
 
   /**
@@ -10,11 +15,20 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    let datalist = getApp().globalData.datalist;
+    let dataList = getApp().globalData.dataList;
     that.setData({
-      datalist: datalist,
-      options: options.data.Name
+      dataList: dataList,
+      options: options.key
     });
+    console.log(this.data.options);
+    var task=app.globalData.dataList[options.key]
+    console.log(task)
+    this.setData({
+      name:task.name,
+      infor:task.infor,
+      situ:task.situation,
+      Label:task.label
+    })
   },
 
   /**
@@ -26,7 +40,7 @@ Page({
   
   finish: function (e) {
     var that = this;
-    getApp().globalData.datalist[that.data.options].situation = 2;
+    getApp().globalData.dataList[that.data.options].situation = 0;
     wx.navigateTo({
       url: '../index/index',
     })
@@ -39,7 +53,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          delete getApp().globalData.datalist[that.data.options];
+          delete getApp().globalData.dataList[that.data.options];
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -50,7 +64,7 @@ Page({
               delta: 1
             });
           }, 1000)
-          console.log(getApp().globalData.datalist)
+          console.log(getApp().globalData.dataList)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
