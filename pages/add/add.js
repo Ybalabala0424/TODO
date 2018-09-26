@@ -17,7 +17,10 @@ Page({
     dataList: {},
     temp:null
   },
-
+  save: function () {
+    wx.setStorageSync('key', app.globalData.dataList);
+    wx.setStorageSync('count', app.globalData.num)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -62,20 +65,13 @@ Page({
       }
       //记录下标
       var index="task"+this.data.num;
-      // console.log(temp.keyname);
-      // this.dataList=app.globalData.dataList;
-      // console.log(this.dataList);
+      
       //增加任务
       app.globalData.dataList[index] = temp;
-      // console.log(app.globalData.dataList[index]);
+      
       //全局的datalist同步局部的dataList
       app.globalData.num++
-      // console.log(app.globalData.dataList);
-      /* this.setData({
-         taskname:null,
-         taskdetail:null,
-         index:0
-       })*/
+      
       wx.hideLoading();
       wx.showToast({
         title: '创建成功',
@@ -92,12 +88,10 @@ Page({
         cancelText: "取消",
 
       });
-    }
-    
-    
-
-    
+    } 
+    this.save()
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -117,7 +111,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.save();
   },
 
   /**

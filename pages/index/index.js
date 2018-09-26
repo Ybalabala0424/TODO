@@ -8,9 +8,28 @@ Page({
     dataList:{},
     isDo:[]
   },
+  save:function(){
+    wx.setStorageSync('key', this.data.dataList);
+    wx.setStorageSync('count',app.globalData.num)
+  },
+  load:function(){
+    app.globalData.dataList = wx.getStorageSync('key');
+    app.globalData.num = wx.getStorageSync('count')
+    console.log(app.globalData.dataList)
+  },
   onLoad: function () {
+    this.load();
+    console.log(app.globalData.dataList);
     var time = util.formatTime(new Date());
-    this.data.dataList = app.globalData.dataList; 
+    
+    if (app.globalData.dataList == undefined || app.globalData.num == '') {
+      app.globalData.dataList = {};
+      app.globalData.num = 0;
+
+    } else {
+      this.data.dataList = app.globalData.dataList;
+    }
+    
     this.setData({
       time: time
     })
@@ -20,12 +39,14 @@ Page({
     var task={}
     var unDo = []
     var isDo = []
-    for (var i in app.globalData.dataList) {
+    var that=this;
+    this.data.dataList = app.globalData.dataList;
+    for (var i in that.data.dataList) {
       task={
-        name:app.globalData.dataList[i].name,
+        name: that.data.dataList[i].name,
         key:i
       }
-      var si = app.globalData.dataList[i].situation;
+      var si = that.data.dataList[i].situation;
       if (si) {
         unDo.push(task)
         unNum++
@@ -39,12 +60,38 @@ Page({
       isDo:isDo
     })
     console.log(app.globalData.dataList)
-    console.log(this.data.dataList)
+    console.log(that.data.dataList)
+    this.save()
   },
   btn: function () {
     var that = this;
     that.setData({
       isShowHistory: (!that.data.isShowHistory)
-    })
-  }
+    });
+    this.save()
+  },
+  onHide: function () {
+    this.save()
+    /*wx.setStorage({
+      key: "key",
+      data: app.globalData.dataList,
+      success: function () {
+        console.log('写入value1成功')
+      },
+      fail: function () {
+        console.log('写入value1发生错误')
+      }
+    }),
+      wx.setStorage( {
+        key: 'count',
+        data: app.globalData.num,
+        success: function () {
+          console.log('写入num成功')
+          console.log(app.globalData.num)
+        },
+        fail: function () {
+          console.log('写入num发生错误')
+        }
+      })*/
+  },
 })

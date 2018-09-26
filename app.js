@@ -1,17 +1,21 @@
 //app.js
 App({
   onLoad: function () {
-    dataList = (wx.getStorage({
+    this.globalData.dataList = wx.getStorageSync('key')/*({
       key: 'key',
-      success: function (res) { },
-    }))
-      num = wx.getStorage({
+      success: function (res) { 
+        console.log('成功')
+      },
+    })*/
+      this.globalData.num = wx.getStorageSync('count')/*({
         key: 'count',
-        success: function (res) { },
-      })
+        success: function (res) { 
+          console.log('成功')
+        },
+      })*/
   },
   onHide:function(){
-    wx.setStorage({
+    wx.setStorageSync('key', this.globalData.dataList)/*({
       key: "key",
       data: this.globalData.dataList,
       success: function () {
@@ -20,8 +24,8 @@ App({
       fail: function () {
         console.log('写入value1发生错误')
       }
-    },
-    {
+    },*/
+    wx.setStorageSync('count', this.globalData.num)/*{
       key:'count',
       data: this.globalData.num,
       success: function () {
@@ -30,7 +34,7 @@ App({
       fail: function () {
         console.log('写入num发生错误')
       }
-    })
+    })*/
   }, 
   globalData: {
     dataList:{},

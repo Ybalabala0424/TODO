@@ -13,6 +13,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  save: function () {
+    wx.setStorageSync('key', app.data.dataList);
+    wx.setStorageSync('count', app.globalData.num)
+  },
   onLoad: function (options) {
     var that = this;
     let dataList = getApp().globalData.dataList;
@@ -70,6 +74,9 @@ Page({
         }
       }
     });
-    
-  }
+    this.save()
+  },
+  onHide: function () {
+    this.save();
+  },
 })
