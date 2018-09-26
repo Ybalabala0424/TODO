@@ -72,26 +72,5 @@ Page({
   },
   onHide: function () {
     this.save()
-    /*wx.setStorage({
-      key: "key",
-      data: app.globalData.dataList,
-      success: function () {
-        console.log('写入value1成功')
-      },
-      fail: function () {
-        console.log('写入value1发生错误')
-      }
-    }),
-      wx.setStorage( {
-        key: 'count',
-        data: app.globalData.num,
-        success: function () {
-          console.log('写入num成功')
-          console.log(app.globalData.num)
-        },
-        fail: function () {
-          console.log('写入num发生错误')
-        }
-      })*/
   },
 })
