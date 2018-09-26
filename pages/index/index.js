@@ -8,10 +8,6 @@ Page({
     dataList:{},
     isDo:[]
   },
-  save:function(){
-    wx.setStorageSync('key', this.data.dataList);
-    wx.setStorageSync('count',app.globalData.num)
-  },
   load:function(){
     app.globalData.dataList = wx.getStorageSync('key');
     app.globalData.num = wx.getStorageSync('count')
@@ -61,16 +57,11 @@ Page({
     })
     console.log(app.globalData.dataList)
     console.log(that.data.dataList)
-    this.save()
   },
   btn: function () {
     var that = this;
     that.setData({
       isShowHistory: (!that.data.isShowHistory)
     });
-    this.save()
-  },
-  onHide: function () {
-    this.save()
   },
 })
